@@ -26,15 +26,15 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean install
-      working-directory: helloworld/pom.xml
+      working-directory: ./helloworld
 
     - name: Run tests
       run: mvn test
-      working-directory: helloworld/pom.xml
+      working-directory: ./helloworld
 
     - name: Package application
       run: mvn package
-      working-directory: helloworld/pom.xml
+      working-directory: ./helloworld
 
     - name: Deploy to AWS EC2
       if: github.ref == 'refs/heads/master'
