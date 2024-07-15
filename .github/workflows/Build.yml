@@ -27,8 +27,9 @@ jobs:
       run: mvn clean install
       working-directory: ./helloworld
 
-    - name: upload Artifact for deployment job
+    - name: Save artifact
       uses: actions/upload-artifact@v2
       with:
         name: spring-boot-hello-world
-        path: '${{github.workspace}}/target/*.jar'
+        path: helloworld/target/*.jar
+        if-no-files-found: warn
