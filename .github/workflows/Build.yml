@@ -27,15 +27,8 @@ jobs:
       run: mvn clean install
       working-directory: ./helloworld
 
-    - name: Run tests
-      run: |
-        mvn -B package --file pom.xml
-        mkdir artifacts && cp target/*.jar artifacts
-        cd artifacts && ls
-      working-directory: ./helloworld
-
-    - name: save artifact
+    - name: upload Artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
-        name: github-actions-artifact
-        path: artifacts
+        name: java-app
+        path: '${{github.workspace}}/target/*.jar'
