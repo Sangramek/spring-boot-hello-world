@@ -1,11 +1,12 @@
 name: build artifact
 
-on: push
-  #   branches:
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - main
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,20 +20,20 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
-	      distribution: 'adopt'
-	      cache: maven
-       
+        distribution: 'adopt'
+        cache: maven
+
     - name: Build with Maven
       run: mvn clean install
 
     - name: Run tests
       run: |
-	    mvn -B package --file pom.xml
-	    mkdir artifacts && cp target/*.jar artifacts
-	cd artifacts && ls
+        mvn -B package --file pom.xml
+        mkdir artifacts && cp target/*.jar artifacts
+        cd artifacts && ls
 
     - name: save artifact
       uses: actions/upload-artifact@v2
       with:
-	name: github-actions-artifact
-	path: artifacts
+        name: github-actions-artifact
+        path: artifacts
